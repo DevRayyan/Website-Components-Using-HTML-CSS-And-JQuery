@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slider</title>
+    <!-- fontawesome premium icons cdn style link -->
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.2/css/all.css">
+    <!-- <link rel="stylesheet" href="../css/main.css"> -->
+    <!-- google font roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <!-- jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+        box-sizing: border-box;
+    }
+
+    body {
+        display: block;
+    }
+
+    .container h1 {
+        text-align: center;
+        margin-top: clamp(20px, 1vw, 1vw);
+        font-size: clamp(25px, 3vw, 3vw);
+    }
+
+    .container p {
+        text-align: center;
+        font-size: clamp(16px, 1.5vw, 1.5vw);
+        font-weight: 400;
+    }
+
+    .container h4 {
+        text-align: center;
+        margin: clamp(20px, 1vw, 1vw) 0;
+        font-size: clamp(20px, 2vw, 2vw);
+        font-weight: 500;
+    }
+
+    .navlinks {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: clamp(20px, 2vw, 2vw);
+    }
+
+    .navlinks button {
+        display: block;
+        background: #1F3086;
+        font-size: clamp(13px, 1.1vw, 1.1vw);
+        font-weight: 400;
+        color: #fff;
+        border: none;
+        border-radius: clamp(3px, .3vw, .3vw);
+        padding: clamp(10px, 1vw, 1vw) clamp(20px, 2vw, 2vw);
+        box-shadow: .1vw .1vw 1vw #1F30865a;
+        cursor: pointer;
+    }
+
+    button.soon {
+        background: #1F3086;
+        position: relative;
+    }
+
+    button.soon::before {
+        content: "UnFinished";
+        background: #dd3e54;
+        position: absolute;
+        right: -10%;
+        top: -15%;
+        padding: clamp(3px, .3vw, .3vw) clamp(10px, 1vw, 1vw);
+        border-radius: clamp(3px, .3vw, .3vw);
+        color: #fff;
+        box-shadow: .1vw .1vw .5vw #861928a1;
+        font-size: clamp(11px, .9vw, .9vw);
+    }
+
+    button.new {
+        background: #1F3086;
+        position: relative;
+    }
+
+    button.new::before {
+        content: "New";
+        background: #0072ff;
+        position: absolute;
+        right: -10%;
+        top: -15%;
+        padding: clamp(3px, .3vw, .3vw) clamp(10px, 1vw, 1vw);
+        border-radius: clamp(3px, .3vw, .3vw);
+        color: #fff;
+        box-shadow: .1vw .1vw .5vw #063b7ca1;
+        font-size: clamp(11px, .9vw, .9vw);
+    }
+
+    /* modal  */
+    .modal-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: .3s;
+    }
+
+    .modal-wrapper.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .modal-wrapper.hide {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .modal {
+        position: relative;
+        /* max-width: 500px; */
+        width: 50%;
+        background-color: #fff;
+        border-radius: clamp(5px, .5vw, .5vw);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-header {
+        padding: clamp(20px, 1.5vw, 1.5vw);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #dd3e54;
+        color: #fff;
+        border-top-left-radius: clamp(5px, .5vw, .5vw);
+        border-top-right-radius: clamp(5px, .5vw, .5vw);
+    }
+
+    .modal-header h3 {
+        margin: 0;
+        font-size: clamp(20px, 2vw, 2vw);
+        font-weight: 300;
+    }
+
+    .close {
+        cursor: pointer;
+        font-size: clamp(15px, 1.4vw, 1.4vw);
+        margin: 0;
+        color: #ffffff9a;
+        background: none;
+        border: none;
+        padding: clamp(5px, .3vw, .3vw) clamp(10px, .6vw, .6vw);
+    }
+
+    .modal-body {
+        padding: clamp(20px, 1vw, 1vw);
+    }
+
+    .modal-body p {
+        font-size: clamp(14px, 1.3vw, 1.3vw);
+    }
+
+    .modal-body a {
+        position: absolute;
+        right: 2%;
+        bottom: 5%;
+        background: #dd3e54;
+        text-decoration: none;
+        color: #fff;
+        padding: clamp(5px, .3vw, .3vw) clamp(10px, .6vw, .6vw);
+        border-radius: clamp(5px, .5vw, .5vw);
+        font-size: clamp(13px, 1vw, 1vw);
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 700px) {
+        .modal {
+            width: 90%;
+
+        }
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>Website Component Designs</h1>
+        <p>Using Html, Css & JQuery</p>
+        <h4><u>Sitemap</u></h4>
+        <div class="navlinks">
+            <button data-link="navbar.html">Navigation Bar</button>
+            <button data-link="sidebar.html">Side NavBar</button>
+            <button data-link="heroslider.html">Image Slider</button>
+            <button data-link="blog.html" class="soon">Blog Portion - Two Columns</button>
+            <button data-link="card.html" class="new">ECommerce Product Cards</button>
+            <button data-link="footer.html">Sticky Footer</button>
+        </div>
+    </div>
+
+    <div class="modal-wrapper">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Important Note.</h3>
+                <button class="close"><i class="fa-regular fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <p>This Project is Incomplete.If you want to watch this component anyway so here is a click button
+                    below.</p>
+                <a class="redirect">See Anyway</a>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script>
+    $(document).ready(() => {
+
+        buttons = document.querySelectorAll(".navlinks button");
+        buttons.forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                // console.log(link)
+                link = $(e.target).data("link");
+                if (btn.classList.contains("soon")) {
+                    modal(link)
+                } else {
+                    window.location.href = `./components/${link}`;
+
+                }
+            })
+        });
+
+
+        function modal(link) {
+            $('.modal-wrapper').removeClass('hide');
+            $('.modal-wrapper').addClass('show');
+
+            $('.redirect').click(function () {
+
+                window.location.href = `./components/${link}`;
+            });
+        }
+        $('.close').click(function () {
+            $('.modal-wrapper').removeClass('show');
+            $('.modal-wrapper').addClass('hide');
+        });
+
+
+        $(document).keydown(function (e) {
+            if (e.which == 27) {
+                $('.modal-wrapper').removeClass('show');
+                $('.modal-wrapper').addClass('hide');
+            }
+        })
+    });
+</script>
+
+</html>
