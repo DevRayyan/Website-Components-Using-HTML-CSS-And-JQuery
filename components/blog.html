@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slider</title>
+    <!-- fontawesome premium icons cdn style link -->
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.2/css/all.css">
+    <!-- google font roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <!-- jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+        box-sizing: border-box;
+    }
+
+    /* external css class */
+
+    .container {
+        height: 40vw;
+        background: #1F308625;
+        padding: .5vw;
+    }
+
+    .wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: .5vw;
+    }
+
+    .blog-portion {
+    }
+
+    .blog-portion.left{
+        position: relative;
+        background: #ffffff;
+        grid-column: 1/4;
+    padding: .5vw;
+}
+.active-blog-img{
+    width: 100%;
+    height: 25vw;
+    margin-bottom: 1vw;
+}
+.active-blog-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: .5vw;
+}
+.blog-portion.left small{
+font-size: 1.2vw;
+margin-top: 1vw;
+font-weight: 500;
+color: #000000;
+}
+.blog-portion.left h3{
+font-size: 1.7vw;
+font-weight: 500;
+}
+.blog-portion.left p{
+    margin-top: .5vw;
+font-size: 1.2vw;
+color: #272727;
+font-weight: 400;
+margin-bottom: .5vw;
+}
+.blog-portion.left span{
+font-size: 1vw;
+color: #272727;
+font-weight:500;
+margin-left: .5vw;
+}
+.blog-portion.left button{
+    position:absolute;
+    left: 0;
+    bottom: 0;
+font-size: 1.2vw;
+color: #000000;
+font-weight: 400;
+padding:.5vw 1.5vw;
+border: none;
+border-radius: .5vw;
+/* line-height: 2vw; */
+background: #DEE1ED;
+/* border: .1vw solid #2525251a; */
+margin: .5vw;
+/* box-shadow: .1vw .1vw .4vw #2727272a; */
+}
+.blog-portion.right {
+        grid-column: 4/6;
+        background: #ffffff;
+        overflow: auto;
+        position: relative;
+    }
+    .blog-relate-list-top {
+        position: sticky;
+        top: 0;
+        min-height: 5vw;
+        width: 100%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: .1vw .1vw .5vw #6464645a;
+        padding: 0 1vw;
+    }
+
+    .blog-relate-list-top p {
+        font-size: 1.4vw;
+        font-weight: 500;
+    }
+
+    .blog-relate-list-top a {
+        background: none;
+        border: none;
+        text-decoration: none;
+        color: #272727;
+        font-size: 1.1vw;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .blog-portion.right .blog {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding:1vw 1vw;
+    }
+
+    .blog-portion.right .blog:hover {
+        background: #0000001a;
+    }
+
+    .blog-portion.right .blog .blog-img {
+        min-width: 5.5vw;
+        max-width: 5.5vw;
+        min-height: 5.5vw;
+        max-height: 5.5vw;
+        border-radius: .7vw;
+        box-shadow: 1px 1px 25px #5050502a;
+        margin-right: 1vw;
+        overflow: hidden;
+    }
+
+ .blog-portion.right .blog .blog-para small {
+        font-size: 1vw;
+        color: #272727;
+        /* color: #006deb; */
+        display: block;
+        font-weight: 500;
+    }
+
+    .blog-portion.right .blog .blog-para a {
+        font-size: 1.3vw;
+        font-weight: 400;
+        text-decoration: none;
+        color: #000000;
+        display: block;
+    }
+
+     .blog-portion.right .blog .blog-para a:hover {
+        text-decoration: 1px underline #000;
+
+    }
+
+    .blog-portion.right .blog .blog-para p {
+        font-size: 1vw;
+        font-weight: 400;
+        color: #555555;
+    }
+
+    .blog-portion.right .blog .blog-img img {
+        width: 100%;
+        height: 100% !important;
+        object-fit: cover;
+    }
+    @media (max-height:700px){
+        .container{
+            height: 320px;
+        }
+ 
+    }
+
+    @media (max-width:700px){
+        .container{
+            height: fit-content;
+        }
+        .blog-portion.right {
+     height: 350px;
+    }
+        .wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: .5vw;
+    }
+    .blog-portion.right {
+        grid-column: 1/1;
+     }
+    }
+    @media (max-height:600px){
+    
+        .wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: .5vw;
+    }
+
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <div class="wrapper">
+            <div class="left blog-portion">
+
+<div class="active-blog-img"><img src="https://source.unsplash.com/random/?rich" alt=""></div>
+<h3>zap mart team starts plantations.</h3>
+<small>Bussiness</small><span>12 december 2022</span>
+<p>Lorem ipsum dolor sit amet consectetur adipig Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam iusto dicta quia officiis, labore a numquam laboriosam nulla? Nihil, autem? e?</p>
+<button>read more</button>
+
+
+            </div>
+            <div class="right blog-portion">
+                <div class="blog-relate-list-top">
+                    <p>Trending Headline News</p>
+                    <a>See All</a>
+                </div>
+                <div href="#" class="blog">
+                    <div class="blog-img">
+                        <img src="https://source.unsplash.com/random/?rich" loading="lazy
+                        " alt="">
+                    </div>
+                    <div class="blog-para">
+                        <small>Bussiness</small>
+                        <a href="">zap mart team starts plantations.</a>
+                        <p>12 december 2012</p>
+                    </div>
+                </div>
+                <div href="#" class="blog">
+                    <div class="blog-img">
+                        <img src="https://source.unsplash.com/random/?rich" loading="lazy
+                        " alt="">
+                    </div>
+                    <div class="blog-para">
+                        <small>Bussiness</small>
+                        <a href="">zap mart team starts plantations.</a>
+                        <p>12 december 2012</p>
+                    </div>
+                </div>
+                <div href="#" class="blog">
+                    <div class="blog-img">
+                        <img src="https://source.unsplash.com/random/?rich" loading="lazy
+                        " alt="">
+                    </div>
+                    <div class="blog-para">
+                        <small>Bussiness</small>
+                        <a href="">zap mart team starts plantations.</a>
+                        <p>12 december 2012</p>
+                    </div>
+                </div>
+                <div href="#" class="blog">
+                    <div class="blog-img">
+                        <img src="https://source.unsplash.com/random/?rich" loading="lazy
+                        " alt="">
+                    </div>
+                    <div class="blog-para">
+                        <small>Bussiness</small>
+                        <a href="">zap mart team starts plantations.</a>
+                        <p>12 december 2012</p>
+                    </div>
+                </div>
+                <div href="#" class="blog">
+                    <div class="blog-img">
+                        <img src="https://source.unsplash.com/random/?rich" loading="lazy
+                        " alt="">
+                    </div>
+                    <div class="blog-para">
+                        <small>Bussiness</small>
+                        <a href="">zap mart team starts plantations.</a>
+                        <p>12 december 2012</p>
+                    </div>
+                </div>
+                <div href="#" class="blog">
+                    <div class="blog-img">
+                        <img src="https://source.unsplash.com/random/?rich" loading="lazy
+                        " alt="">
+                    </div>
+                    <div class="blog-para">
+                        <small>Bussiness</small>
+                        <a href="">zap mart team starts plantations.</a>
+                        <p>12 december 2012</p>
+                    </div>
+                </div>
+                <div href="#" class="blog">
+                    <div class="blog-img">
+                        <img src="https://source.unsplash.com/random/?rich" loading="lazy
+                        " alt="">
+                    </div>
+                    <div class="blog-para">
+                        <small>Bussiness</small>
+                        <a href="">zap mart team starts plantations.</a>
+                        <p>12 december 2012</p>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    $("document").ready(function () {
+
+    })
+
+</script>
+
+</html>
